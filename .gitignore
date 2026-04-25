@@ -1,0 +1,46 @@
+# Binary
+/nstream
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test / coverage
+*.test
+*.out
+coverage.txt
+profile.cov
+
+# Env and secrets
+.env
+!/.env.example
+wallet.json
+
+# Data (SQLite and sidecars)
+nstream.db
+nstream.db-*
+*.db-journal
+
+# Frontend build output & deps
+/web/dist
+/web/node_modules
+
+# Go workspace
+go.work
+go.work.sum
+
+# Air (hot reload)
+tmp/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+*.sublime-*
+
+# Logs
+*.log
