@@ -4,7 +4,8 @@
 providers = ["go"]
 
 [phases.setup]
-nixPkgs = ["...", "nodejs_22", "ffmpeg"]
+# Nixpacks pins nixpkgs without nodejs_22; nodejs_20 is present there and works for the Vite build.
+nixPkgs = ["...", "nodejs_20", "ffmpeg"]
 
 [phases.install]
 cmds = ["...", "cd web && npm ci"]
@@ -18,4 +19,3 @@ cmds = [
 
 [start]
 cmd = "./nstream"
-
