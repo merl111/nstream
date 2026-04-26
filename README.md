@@ -1,8 +1,7 @@
 # nstream
 
-A self-hosted [NeoFS](https://neo.org/neoFS) media platform: stream, browse, and
-transcode a video collection stored on distributed NeoFS object storage, with
-a single Go binary and embedded web UI.
+A self-hosted NeoFS media platform — stream, browse, and transcode your video
+collection stored on the [NeoFS](https://neo.org/neoFS) distributed storage.
 
 ## Features
 
@@ -18,11 +17,25 @@ a single Go binary and embedded web UI.
 - **SQLite** — zero-dependency embedded database (`modernc.org/sqlite`, no CGO)
 - **Single binary** — frontend assets embedded with `//go:embed`
 
+## Screenshots
+
+### Overview
+![nstream overview](./nstream-overview.png)
+
+### Player
+![nstream player](./nstream-player.png)
+
+### Details
+![nstream details](./nstream-details.png)
+
+### Container management
+![nstream container management](./nstream-container-management.png)
+
 ## Requirements
 
 | Tool | Required | Purpose |
 |------|----------|---------|
-| Go (see `go.mod`) | yes | build |
+| Go ≥ 1.21 | yes | build |
 | Node ≥ 18 + npm | build-time | frontend |
 | ffmpeg | runtime | HLS transcoding (optional) |
 | ffprobe | runtime | duration probing during scan (optional) |
@@ -36,8 +49,8 @@ cd web && npm install && npm run build && cd ..
 # 2. Build the binary (frontend is embedded automatically)
 go build ./cmd/nstream
 
-# 3. Configure — create `.env` in the project root (optional; see table below)
-#    or set the same keys in your environment. Do not commit secrets.
+# 3. Configure — edit .env (loaded automatically on startup)
+cp .env .env        # already present; edit as needed
 
 # 4. Run
 ./nstream
@@ -139,17 +152,3 @@ Browser ──── REST + cookie ────► Go API
 Scanner (goroutine) ──────────► NeoFS Search → SQLite
 Job Runner (goroutine pool) ──► NeoFS Range → ffmpeg → NeoFS Put → SQLite
 ```
-
-## Project layout
-
-| Path | Role |
-|------|------|
-| `cmd/nstream/` | Program entrypoint |
-| `internal/` | HTTP server, API, NeoFS client, database, transcode, jobs |
-| `web/` | React + Vite + Tailwind UI (`npm run build` output is embedded) |
-
-## License
-
-Copyright 2026 The nstream authors.
-
-Licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). A copy of the license is included as [`LICENSE`](LICENSE) in this repository.
